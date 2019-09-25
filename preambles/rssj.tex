@@ -1,0 +1,92 @@
+% \documentclass[10.5pt,a4j,uplatex]{jsarticle}
+\documentclass[10pt,a4j,twocolumn,uplatex]{jsarticle}
+% \usepackage{flushend}  % 2段組の最終ページの左右の高さを合わせる
+\usepackage[ipaex]{pxchfon}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}  % math環境
+\usepackage{bm}  % ベクトルを表記
+\usepackage[dvipdfmx]{graphicx}
+% \usepackage{subfigure}  % 並べた図に異なるキャプションをつける(古いパッケージ)
+% \usepackage{verbatim}  % 入力通りの出力
+% \usepackage{wrapfig}  % 図の周りに文章を回り込ませる
+% \usepackage{ascmac}  % screen環境など
+% \usepackage{makeidx}  % ふりがなを付ける
+\usepackage{subfiles}  % ファイル分割
+% \usepackage{comment}  % コメントアウト
+% \usepackage[version=3]{mhchem}  % 化学式
+% \usepackage{url}  % url表示
+\usepackage[all, error]{onlyamsmath}  % 古いパッケージを警告
+\usepackage[dvipdfmx]{hyperref}  % ハイパーリンク
+\usepackage{url}  % urlの記載
+\usepackage[top=26truemm,bottom=26truemm,left=21truemm,right=21truemm]{geometry}
+\graphicspath{{images/}{../images/}}  % 画像読み込みディレクトリ
+
+% 引用コマンド
+\newcommand{\tabref}[1]{Table.~\ref{#1}}
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+\usepackage{letltxmacro}
+\LetLtxMacro{\originaleqref}{\eqref}
+\renewcommand{\eqref}{式~\originaleqref}
+
+% abstractの見出し変更
+\renewcommand{\abstractname}{}
+
+% 注釈の表示を変更
+\renewcommand{\thefootnote}{\arabic{footnote}}
+
+% タイトルの注釈を数字に
+\makeatletter%% ここから、おまじない
+  \renewcommand{\maketitle}{\par%%% \maketitleの再定義
+    \begingroup
+%%%      \renewcommand\thefootnote{\@fnsymbol\c@footnote}% オリジナル
+        \renewcommand\thefootnote{\arabic{footnote}}%% この行を変更
+      \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+      \long\def\@makefntext##1{\advance\leftskip 3zw
+        \parindent 1zw\noindent
+        \llap{\@textsuperscript{\normalfont\@thefnmark}\hskip0.3zw}##1}%
+      \if@twocolumn
+        \ifnum \col@number=\@ne
+          \@maketitle
+        \else
+          \twocolumn[\@maketitle]%
+        \fi
+      \else
+        \newpage
+        \global\@topnum\z@  % Prevents figures from going at top of page.
+        \@maketitle
+      \fi
+      \plainifnotempty
+      \@thanks
+    \endgroup
+    \setcounter{footnote}{0}%
+    \global\let\thanks\relax
+    \global\let\maketitle\relax
+    \global\let\@thanks\@empty
+    \global\let\@author\@empty
+    \global\let\@date\@empty
+    \global\let\@title\@empty
+    \global\let\title\relax
+    \global\let\author\relax
+    \global\let\date\relax
+    \global\let\and\relax
+  }
+  \def\@maketitle{%
+    \newpage\null
+    \vskip 2em
+    \begin{center}%
+      \let\footnote\thanks
+      {\LARGE \@title \par}%
+      \vskip 1.5em
+      {\large
+        \lineskip .5em
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em
+      {\large \@date}%
+    \end{center}%
+    \par\vskip 1.5em
+    \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
+  }
+\makeatother%% ここまで、おまじない
