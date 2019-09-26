@@ -5,8 +5,27 @@
 \section{背景}
 
 おふざけが足りてる\cite{Key1}。
+\figref{pic_1}はダミー画像で\tabref{tab1}はダミー表で\eqref{eq1}はダミー式です。
 
-
-
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=30mm]
+      {dummy.png}
+ \caption{ダミー画像}
+ \label{pic_1}
+\end{figure}
+\begin{table}[htb]
+  \centering
+  \caption{ダミー表}
+  \label{tab1}
+  \begin{tabular}{|c|c|}\hline
+    パラメータ名 & 値\\ \hline
+    hoge & $95.8\%$\\ \hline
+    huga & $69.9\%$\\ \hline
+  \end{tabular}
+\end{table}
+\begin{equation}\label{eq1}
+  1 + 1 = 2
+\end{equation}
 
 \end{document}

@@ -27,7 +27,11 @@
 \newcommand{\figref}[1]{Fig.~\ref{#1}}
 \usepackage{letltxmacro}
 \LetLtxMacro{\originaleqref}{\eqref}
-\renewcommand{\eqref}{式~\originaleqref}
+\renewcommand{\eqref}{Eq.~\originaleqref}
+
+% 表の表示を英語に
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Table.}
 
 % abstractの見出し変更
 \renewcommand{\abstractname}{}
