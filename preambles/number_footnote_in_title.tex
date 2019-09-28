@@ -1,0 +1,55 @@
+% タイトルの注釈を数字に
+\makeatletter%% ここから、おまじない
+  \renewcommand{\maketitle}{\par%%% \maketitleの再定義
+    \begingroup
+%%%      \renewcommand\thefootnote{\@fnsymbol\c@footnote}% オリジナル
+        \renewcommand\thefootnote{\arabic{footnote}}%% この行を変更
+      \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
+      \long\def\@makefntext##1{\advance\leftskip 3zw
+        \parindent 1zw\noindent
+        \llap{\@textsuperscript{\normalfont\@thefnmark}\hskip0.3zw}##1}%
+      \if@twocolumn
+        \ifnum \col@number=\@ne
+          \@maketitle
+        \else
+          \twocolumn[\@maketitle]%
+        \fi
+      \else
+        \newpage
+        \global\@topnum\z@  % Prevents figures from going at top of page.
+        \@maketitle
+      \fi
+      \plainifnotempty
+      \@thanks
+    \endgroup
+    \setcounter{footnote}{0}%
+    \global\let\thanks\relax
+    \global\let\maketitle\relax
+    \global\let\@thanks\@empty
+    \global\let\@author\@empty
+    \global\let\@date\@empty
+    \global\let\@title\@empty
+    \global\let\title\relax
+    \global\let\author\relax
+    \global\let\date\relax
+    \global\let\and\relax
+  }
+  \def\@maketitle{%
+    \newpage\null
+    \vskip 2em
+    \begin{center}%
+      \let\footnote\thanks
+      {\LARGE \@title \par}%
+      \vskip 1.5em
+      {\large
+        \lineskip .5em
+        \begin{tabular}[t]{c}%
+          \@author
+        \end{tabular}\par}%
+      \vskip 1em
+      {\large \@date}%
+    \end{center}%
+    \par\vskip 1.5em
+    \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
+  }
+\makeatother%% ここまで、おまじない
