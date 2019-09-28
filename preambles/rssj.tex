@@ -75,22 +75,35 @@
     \global\let\date\relax
     \global\let\and\relax
   }
+  \def\enauthor#1{\def\@enauthor{#1}}  % この行追加
+  \def\entitle#1{\def\@entitle{#1}}  % この行追加
+
+  % 引用文献の書式変更
+  % \renewcommand{\@cite}[2]{#1)}
+  \renewcommand{\@biblabel}[1]{#1)}
+
+  % maketitleを変更
   \def\@maketitle{%
     \newpage\null
     \vskip 2em
     \begin{center}%
       \let\footnote\thanks
-      {\LARGE \@title \par}%
-      \vskip 1.5em
-      {\large
+      % {\LARGE \@title \par}%
+      {\large \@title \par}  % この行変更
+      \vskip 1em
+      {\normalsize \@entitle \par}% この行追加
+      \vskip 1em
+      {\normalsize
         \lineskip .5em
         \begin{tabular}[t]{c}%
-          \@author
+          % \@author
+          {\normalsize \@author}\\  % この行変更
+          {\small \@enauthor}  % この行追加
         \end{tabular}\par}%
-      \vskip 1em
-      {\large \@date}%
+      % \vskip 1em
+      % {\large \@date}%
     \end{center}%
-    \par\vskip 1.5em
+    % \par\vskip 1em
     \ifvoid\@abstractbox\else\centerline{\box\@abstractbox}\vskip1.5em\fi
   }
 \makeatother%% ここまで、おまじない
