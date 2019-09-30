@@ -44,6 +44,12 @@
 % 参考文献の表示
 \renewcommand{\refname}{【参考文献】}
 
+% セクションの文字サイズ
+\usepackage{titlesec}
+\titleformat*{\section}{\normalsize\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+\titleformat*{\subsubsection}{\normalsize\bfseries}
+
 % タイトルの注釈を数字に
 \makeatletter%% ここから、おまじない
   \renewcommand{\maketitle}{\par%%% \maketitleの再定義
@@ -94,9 +100,9 @@
     \begin{center}%
       \let\footnote\thanks
       % {\LARGE \@title \par}%
-      {\large \@title \par}  % この行変更
+      {\bf {\large \@title \par}}  % この行変更
       \vskip 1em
-      {\normalsize \@entitle \par}% この行追加
+      {\bf {\normalsize \@entitle \par}}% この行追加
       \vskip 1em
       {\normalsize
         \lineskip .5em
